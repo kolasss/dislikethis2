@@ -19,6 +19,13 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comments = @post.comments.all
 
+    if user_signed_in?
+      @rating_currentuser = @post.dislikes.find_by_user_id(current_user.id)
+      unless @rating_currentuser 
+        @rating_currentuser = current_user.dislikes.new
+      end
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }

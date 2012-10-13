@@ -20,9 +20,31 @@
   <%= @post.rating %>
 </p>
 
+<p class="stars floatstars">
+    <%= pluralize(@post.count_dislikes, "vote") %>
+</p>
+
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
+
+<section id="rating">   
+  <% if user_signed_in? %>
+      <%= form_for [@post, @rating_currentuser] do |f| %>
+          <div id="ratingbox">
+              <ul id="ratingbuttons">
+                  <li><%= f.radio_button :rate, "-1" %><span>dislike</span></li>
+                  <li><%= f.radio_button :rate, "1" %><span>like</span></li>                     
+              </ul>
+              <div class="center"><%= f.submit "submit", :class => "awesome custom red" %></div>
+          </div>
+      <% end %>
+  <% else %>
+      <div id="ratingbox"><%= link_to "Sign in", signin_path %> to rate this article</div>
+  <% end %>   
+</section>
+
+
 
 <section id="comments"> 
   <% @comments.each do |comment| %>
@@ -46,25 +68,19 @@
       <% if user_signed_in? %>
           <div class="avatar"><%= image_tag gravatar(current_user.email, 48) %></div>
           <div class="commentbody">
-              <% if current_user.name == nil or current_user.name == '' %>
-                  <div class="commenthead">
-                      Please complete your <%= link_to "profile", edit_user_registration_path %> before posting comments.
-                  </div>
-              <% else %>              
-                  <div class="commenthead">
-                      <%= current_user.name %>
-                  </div>
-                  <div>
-                      <%= form_for [@post, current_user.comments.new] do |f| %>
-                          <%= f.text_area :body, :class => "fullwidth" %>
-                          <%= f.submit "Add Comment", :class => "awesome custom red" %>
-                      <% end %>               
-                  </div>          
-              <% end %>
+            <div class="commenthead">
+                <%= current_user.name %>
+            </div>
+            <div>
+                <%= form_for [@post, current_user.comments.new] do |f| %>
+                    <%= f.text_area :body, :class => "fullwidth" %>
+                    <%= f.submit "Add Comment", :class => "awesome custom red" %>
+                <% end %>               
+            </div>
           </div>  
       <% else %>
           <div class="signin">
-              Please <%= link_to "sign in", new_user_session_path %> before posting a comment.
+              Please <%= link_to "sign in", signin_path %> before posting a comment.
           </div>
       <% end %>
   </article>

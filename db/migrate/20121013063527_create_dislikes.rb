@@ -8,6 +8,6 @@ class CreateDislikes < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :ratings, :post_id
+    add_index :dislikes, :post_id
   end
 end

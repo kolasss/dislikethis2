@@ -5,6 +5,7 @@ Dislikethis::Application.routes.draw do
   	end
 
     resources :comments, :only => [:create, :destroy] 
+    resources :dislikes, :only => [:create, :update, :destroy]
   end
 
   root :to => "posts#index"
