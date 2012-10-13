@@ -1,5 +1,7 @@
 Dislikethis::Application.routes.draw do
-  root :to => "home#index"
+  resources :posts
+
+  root :to => "posts#index"
   resources :users, :only => [:index, :show, :edit, :update ]
   match '/auth/:provider/callback' => 'sessions#create'
   match '/signin' => 'sessions#new', :as => :signin
