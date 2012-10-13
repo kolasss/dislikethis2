@@ -1,5 +1,9 @@
 Dislikethis::Application.routes.draw do
-  resources :posts
+  resources :posts do
+  	collection do
+  		get 'myposts'
+  	end
+  end
 
   root :to => "posts#index"
   resources :users, :only => [:index, :show, :edit, :update ]

@@ -84,6 +84,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def myposts
+  @myposts = current_user.posts.all
+ 
+  respond_to do |format|
+    format.html
+    format.xml  { render :xml => @myarticles }
+  end
+end
+
   protected
     def record_not_found
       flash[:error] = 'The post you requested could not be found.'

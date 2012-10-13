@@ -1,0 +1,37 @@
+
+
+<h2>Manage your posts</h2>   
+    
+<p><%= link_to 'New post', new_post_path, :class => "awesome custom red" %></p>
+
+<section id="myposts">
+        
+    <% if !@myposts.empty? %>
+        
+        <ol>
+    
+        <% @myposts.each do |post| %>
+            <li class="mypost">
+        
+                <div class="title"><%= post.title %></div>
+                <div class="created">
+                    Created / Last updated: <%= post.created_at.strftime("%B %d, %Y") %> / <%= post.updated_at.strftime("%B %d, %Y") %>
+                </div>
+    
+                <div class="actions">
+                    <span class="show"><%= link_to 'View', post, :class => "awesome custom red" %></span>
+                    <span class="edit"><%= link_to 'Edit', edit_post_path(post), :class => "awesome custom red" %></span>
+                    <span class="delete"><%= link_to 'Delete', post, :confirm => 'Are you sure?', :method => :delete, :class => "awesome custom black" %></span>
+                </div>
+                
+            </li>
+        <% end %>
+
+        </ol>
+
+    <% else %>
+        <p>You have not written any posts yet. Start to contribute: <%= link_to 'New post', new_post_path, :class => "awesome custom red" %> %></p>
+    <% end %>
+
+</section>
+
