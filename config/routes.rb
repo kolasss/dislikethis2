@@ -3,6 +3,8 @@ Dislikethis::Application.routes.draw do
   	collection do
   		get 'myposts'
   	end
+
+    resources :comments, :only => [:create, :destroy] 
   end
 
   root :to => "posts#index"

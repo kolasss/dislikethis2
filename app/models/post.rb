@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   attr_accessible :title, :url
 
   belongs_to :user
+  has_many :comments, :dependent => :destroy 
  
   validates :user_id, :presence => true
   validates :title, :presence => true, :length => { :maximum => 80 }
