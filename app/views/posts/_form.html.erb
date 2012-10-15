@@ -1,9 +1,14 @@
-<%= simple_form_for(@post) do |f| %>
+<%= simple_form_for(@post, :html => {:multipart => true}) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :title %>
-    <%= f.input :url %>
+    <%= f.label :url, label: 'Image' %>
+    <%= f.file_field :url %>
+    <% if f.error :url_content_type %>
+		  Content type is invalid
+	  <% end %>
+
   </div>
 
   <div class="form-actions">

@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013063527) do
+ActiveRecord::Schema.define(:version => 20121013080633) do
 
   create_table "comments", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "post_id"
+    t.integer  "user_id",    :null => false
+    t.integer  "post_id",    :null => false
     t.string   "body",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20121013063527) do
   create_table "dislikes", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "post_id",    :null => false
-    t.integer  "rate"
+    t.integer  "rate",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -34,12 +34,16 @@ ActiveRecord::Schema.define(:version => 20121013063527) do
   add_index "dislikes", ["post_id"], :name => "index_dislikes_on_post_id"
 
   create_table "posts", :force => true do |t|
-    t.integer  "user_id",                   :null => false
-    t.string   "title",                     :null => false
-    t.text     "url",                       :null => false
-    t.integer  "rating",     :default => 0, :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "user_id",                         :null => false
+    t.string   "title",                           :null => false
+    t.text     "url"
+    t.integer  "rating",           :default => 0, :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.string   "url_file_name"
+    t.string   "url_content_type"
+    t.integer  "url_file_size"
+    t.datetime "url_updated_at"
   end
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"

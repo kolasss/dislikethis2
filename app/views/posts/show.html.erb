@@ -11,8 +11,10 @@
 </p>
 
 <p>
-  <b>Url:</b>
-  <%= @post.url %>
+  <b>Image:</b>
+  <%= image_tag @post.url.url %>
+  <%= image_tag @post.url.url(:medium) %>
+  <%= image_tag @post.url.url(:thumb) %>
 </p>
 
 <p>

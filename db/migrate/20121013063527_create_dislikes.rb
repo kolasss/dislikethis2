@@ -3,7 +3,7 @@ class CreateDislikes < ActiveRecord::Migration
     create_table :dislikes do |t|
       t.integer :user_id, :null => false
       t.integer :post_id, :null => false
-      t.integer :rate
+      t.integer :rate, :null => false
 
       t.timestamps
     end
